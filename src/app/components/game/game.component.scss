@@ -1,0 +1,25 @@
+.container  {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  height: 80px;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 25% 25% 25% 25%;
+  height: calc(100% - 80px);
+}
+
+
+.img-wrap {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  margin: 3px;
+}

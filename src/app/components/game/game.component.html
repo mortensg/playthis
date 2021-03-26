@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="header">
+  </div>
+    <div class="wrap">
+      <div class="img-wrap" *ngFor="let item of gameData" (click)="clickImg(item)">
+        <img [ngClass]="{'found': item.found}" src="{{item.img}}" alt="">
+      </div>
+    </div>
+</div>
