@@ -7,16 +7,20 @@ import { AppComponent } from './app.component';
 import { GameComponent } from './components/game/game.component';
 
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HighscoreComponent } from './components/highscore/highscore.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent
+    GameComponent,
+    HighscoreComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

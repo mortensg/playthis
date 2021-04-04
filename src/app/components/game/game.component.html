@@ -1,9 +1,82 @@
 <div class="container">
-  <div class="header">
+  <div class="header" *ngIf="gameStatus === 'running'">
+    <div class="left">
+      Hey {{ playerName }} !!
+    </div>
+    <div class="middle">
+      {{ gameTime * 10 | date:'mm:ss:SS' }}
+    </div>
+    <div class="right">
+      <button class="nes-btn is-warning" (click)="gameStatus = 'new'">New start</button>
+      <button class="nes-btn is-primary" routerLink="highscore">Highscore</button>
+    </div>
   </div>
-    <div class="wrap">
-      <div class="img-wrap" *ngFor="let item of gameData" (click)="clickImg(item)">
-        <img [ngClass]="{'found': item.found}" src="{{item.img}}" alt="">
+    <div class="wrap" [ngClass]="gameMode">
+      <div class="overlay" *ngIf="onTimeOut"></div>
+      <div class="resumeGame new-game" *ngIf="gameStatus === 'new'">
+        <dialog class="nes-dialog is-rounded" open>
+          <form method="dialog">
+            <h2 class="title">
+              Start a new Game</h2>
+           <form>
+            <div class="nes-field">
+              <label for="name_field">Your name</label>
+              <input [(ngModel)]="playerName" name="playerName" type="text" id="name_field" class="nes-input">
+            </div>
+           </form>
+
+            <p>
+              Select game mode
+            </p>
+
+            <label *ngFor="let level of gameLevels">
+              <input [(ngModel)]="gameMode" type="radio" class="nes-radio" value="{{ level.lvlText }}" name="answer" />
+              <span>{{ level.lvlText }}</span>
+            </label>
+
+            <menu class="dialog-menu">
+              <button  class="nes-btn" [ngClass]="{'is-disabled': !playerName, 'is-success': playerName}" [disabled]="!playerName" (click)="startGame()">
+                Start game
+              </button>
+            </menu>
+          </form>
+        </dialog>
+      </div>
+      <div class="won-game" *ngIf="gameStatus === 'won'">
+        <h1>
+          You WON
+        </h1>
+        <p>
+          here is a joke to celebrake
+        </p>
+        <button class="nes-btn is-primary" routerLink="highscore">Highscore</button>
+          <section class="message-list">
+            <section class="message -left">
+              <i class="nes-bcrikko"></i>
+              <!-- Balloon -->
+              <div class="nes-balloon from-left">
+                <p>{{ yourPrize }}</p>
+              </div>
+            </section>
+          </section>
+      </div>
+      <div class="resumeGame" *ngIf="gameStatus === 'inactive'">
+        <dialog class="nes-dialog is-rounded" open>
+          <form method="dialog">
+            <p class="title">Want to resume game??</p>
+            <menu class="dialog-menu">
+              <button  class="nes-btn is-success" (click)="resumeGame()">
+                Resume game
+              </button>
+              <button class="nes-btn is-primary" (click)="gameStatus = 'new'">
+                New Game
+              </button>
+            </menu>
+          </form>
+        </dialog>
+      </div>
+      <div class="img-wrap" *ngFor="let image of gameImages" (click)="clickImg(image)" [ngClass]="{'found': image.found, 'active': image.active}">
+        <img src="{{image.img}}" alt="">
       </div>
     </div>
 </div>

@@ -1,3 +1,4 @@
+
 .container  {
   height: 100vh;
   overflow: hidden;
@@ -5,13 +6,50 @@
 
 .header {
   height: 80px;
+  display: flex;
+
+  div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+
+    &.middle {
+      justify-content: center;
+    }
+
+    &.right {
+      justify-content: flex-end;
+
+      button:first-child {
+        margin-right: 20px;
+      }
+    }
+  }
 }
 
 .wrap {
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows: 25% 25% 25% 25%;
   height: calc(100% - 80px);
+  grid-gap: 6px;
+
+  &.easy {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  &.medium {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  &.hard {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+  &.hell {
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+  }
 }
 
 
@@ -20,6 +58,97 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   background-color: black;
-  margin: 3px;
+
+  &.active {
+    pointer-events:none
+  }
+
+  img {
+    display: none;
+  }
+
+  &.active, &.found {
+    img {
+      display: inherit;
+
+    }
+  }
+}
+
+.won-game {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255 255 255 / 92%);
+  z-index: 100;
+
+  .message {
+    display: flex;
+    align-items: flex-end;
+    max-width: 600px;
+    margin-top: 50px;
+
+    div {
+      flex: 1;
+      margin-left: 20px;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: red;
+  z-index: 1;
+  opacity: 0;
+}
+
+
+.resumeGame {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  z-index: 100;
+
+  &.new-game {
+    input {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+    }
+    .dialog-menu {
+      padding-left: 0px;
+    }
+  }
+
+
+}
+
+.dialog-menu {
+  button {
+    margin-top: 20px;
+
+    &:first-child {
+      margin-right: 20px;
+    }
+  }
 }

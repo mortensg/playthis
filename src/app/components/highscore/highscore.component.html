@@ -1,0 +1,26 @@
+<div class="header">
+  <div>
+    <button class="nes-btn is-primary" routerLink="/">Go back</button>
+  </div>
+</div>
+<div class="content">
+  <div class="nes-table-responsive">
+    <table class="nes-table is-bordered is-centered">
+      <thead>
+        <tr>
+          <th>Player Name</th>
+          <th>Mode</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data">
+          <td>{{item.playerName}}</td>
+          <td>{{item.mode}}</td>
+          <td>{{item.time * 10  | date:'mm:ss:SS'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
