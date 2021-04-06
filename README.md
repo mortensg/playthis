@@ -4,6 +4,6 @@
 
 docker build -t playthis .
 
-## TO start the project
+## To start the project
 
 docker run --rm --name playthis -d -p 8888:80 playthis
