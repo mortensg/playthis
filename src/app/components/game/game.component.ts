@@ -1,5 +1,7 @@
+import { DataService } from './../../data.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -19,9 +21,11 @@ export class GameComponent implements OnInit {
   gameTime;
   highscore = [];
   yourPrize;
+  loading = false;
 
   constructor (
-      private http: HttpClient
+      private http: HttpClient,
+      private dataService: DataService
     ){
     this.gameLevels = [
       { lvlText: 'easy', lvlValue: 3 },
@@ -34,7 +38,6 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     if(localStorage.playerName) this.playerName = localStorage.playerName;
-    if(localStorage.highscore) this.highscore = JSON.parse(localStorage.getItem('highscore'));
 
     if(localStorage.images) {
       this.gameImages = JSON.parse(localStorage.getItem('images'));
@@ -69,9 +72,11 @@ export class GameComponent implements OnInit {
 
 
   getImages(amount) {
-      this.http.get('/api/birds?count=' + amount).subscribe((res:any) => {
+    this.loading = true;
+      this.http.get('https://dog.ceo/api/breeds/image/random/' + amount).subscribe((res:any) => {
+        this.loading = false;
         for (var i = 1; i <= 2; i++) {
-          res.forEach(img => {
+          res.message.forEach(img => {
             this.gameImages.push({img, 'found': false, 'active': false});
           });
         }
@@ -113,8 +118,9 @@ export class GameComponent implements OnInit {
     if(!serach) {
       this.gameStatus = 'won';
       localStorage.removeItem('images');
-      this.highscore.push({'playerName': this.playerName, 'mode': this.gameMode, 'time': this.gameTime});
-      localStorage.setItem('highscore', JSON.stringify(this.highscore));
+      this.highscore.push({'name': this.playerName, 'mode': this.gameMode, 'time': this.gameTime});
+      const gameInfo = { 'playerName': this.playerName, 'mode': this.gameMode, 'time': this.gameTime }
+      this.dataService.savehighscore(gameInfo);
       this.youWon()
     }
   }
@@ -131,7 +137,7 @@ export class GameComponent implements OnInit {
 
   youWon() {
     localStorage.removeItem('images')
-    this.http.get('http://api.icndb.com/jokes/random?firstName=' + this.playerName).subscribe((res:any) => {
+    this.http.get('https://api.icndb.com/jokes/random?firstName=' + this.playerName).subscribe((res:any) => {
       this.yourPrize = res.value.joke
     })
   }

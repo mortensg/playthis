@@ -9,6 +9,11 @@ import { GameComponent } from './components/game/game.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HighscoreComponent } from './components/highscore/highscore.component';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +25,9 @@ import { HighscoreComponent } from './components/highscore/highscore.component';
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+ 	  AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

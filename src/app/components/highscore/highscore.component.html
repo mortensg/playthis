@@ -3,6 +3,16 @@
     <button class="nes-btn is-primary" routerLink="/">Go back</button>
   </div>
 </div>
+<div class="submenu">
+  <p>
+    Select mode:
+  </p>
+  <button class="nes-btn" [ngClass]="{'is-success': selectedMode === 'easy'}" (click)="filterData('easy')">Easy</button>
+    <button class="nes-btn" [ngClass]="{'is-success': selectedMode === 'medium'}" (click)="filterData('medium')">Medium</button>
+    <button class="nes-btn" [ngClass]="{'is-success': selectedMode === 'hard'}" (click)="filterData('hard')">Hard</button>
+    <button class="nes-btn" [ngClass]="{'is-success': selectedMode === 'hell'}" (click)="filterData('hell')">Hell</button>
+    <button class="nes-btn" [ngClass]="{'is-success': selectedMode === 'all'}" (click)="filterData('all')">All Mods</button>
+</div>
 <div class="content">
   <div class="nes-table-responsive">
     <table class="nes-table is-bordered is-centered">
@@ -14,8 +24,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of data">
-          <td>{{item.playerName}}</td>
+        <tr *ngFor="let item of displayData">
+          <td>{{item.name}}</td>
           <td>{{item.mode}}</td>
           <td>{{item.time * 10  | date:'mm:ss:SS'}}</td>
         </tr>

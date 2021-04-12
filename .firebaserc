@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "faq-gnnkar"
+  },
+  "targets": {
+    "faq-gnnkar": {
+      "hosting": {
+        "playthis": [
+          "faq-gnnkar"
+        ]
+      }
+    }
+  }
+}

@@ -47,7 +47,7 @@
           You WON
         </h1>
         <p>
-          here is a joke to celebrake
+          here is a joke to celebrate
         </p>
         <button class="nes-btn is-primary" routerLink="highscore">Highscore</button>
           <section class="message-list">
@@ -74,6 +74,12 @@
             </menu>
           </form>
         </dialog>
+      </div>
+      <div class="loading" *ngIf="loading">
+        <img src="https://i.gifer.com/77OF.gif" alt="">
+        <h1>
+          Loading images
+        </h1>
       </div>
       <div class="img-wrap" *ngFor="let image of gameImages" (click)="clickImg(image)" [ngClass]="{'found': image.found, 'active': image.active}">
         <img src="{{image.img}}" alt="">
